@@ -1,4 +1,4 @@
-var url = 'http://localhost:1010/';
+var url = 'https://citationsapi.herokuapp.com/';
 
 document.getElementById("ajaxButton").addEventListener("click", makeRequest);
 
