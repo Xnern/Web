@@ -38,14 +38,12 @@ const sites =[
 const articles = []
 
 sites.forEach(sites => {
-    console.log("test 1");
     axios.get(sites.adress)
         .then(response => {
 
             const html = response.data
 
             const $ = cheerio.load(html)
-            console.log("test 2");
 
             //On vise la div parents qui détient nos 2 elements qu'on veut
             $('.citation').each(function () {
@@ -63,7 +61,6 @@ sites.forEach(sites => {
 
 
 app.get("/", (req, res) =>{
-    console.log("test 4");
     res.json(articles)
 })
 
