@@ -5,12 +5,74 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="dist/output.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+        <Script src = "http://code.jquery.com/jquery-1.10.2.js"> </script>
+        <Script src = "http://code.jquery.com/ui/1.10.4/jquery-ui.js"> </script>
         <title>Quiz Crypto</title>
     </head>
 
-    <body class="h-screen bg-red-400">
-        <div class="w-1/2 h-1/2 bg-slate-600">
-            <p class="text-2xl text-center">qzdzqddz</p>
-        </div>
+    <body class="h-screen w-screen">
+
+        <header class="bg-gray-200 h-20 mb-16 flex justify-between items-center px-40">
+            <h1 class="text-2xl">Quizz</h1>
+            <nav class="w-80 h-full">
+                <ul class="flex justify-between w-full items-center h-full">
+                    <li><button class="rounded-2xl bg-slate-50 px-2 py-1 shadow-xl hover:bg-slate-300 active:mt-2 theme" value="Géographie">Géographie</button></li>
+                    <li><button class="rounded-2xl bg-slate-50 px-2 py-1 shadow-xl hover:bg-slate-300 active:mt-2 theme" value="Histoire">Histoire</button></li>
+                    <li><button class="rounded-2xl bg-slate-50 px-2 py-1 shadow-xl hover:bg-slate-300 active:mt-2 theme" value="Mathématiques">Mathématiques</button></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="w-full flex flex-col justify-center items-center">
+            <header class="mb-10">
+                <h2 class="text-xl">Géographie</h2>
+            </header> 
+            <div class="bg-slate-200 w-1/2 h-80 rounded-lg shadow-lg">
+                <!--Start menu-->
+                <div class="flex flex-col justify-evenly h-full visible items-center" id="start-menu">
+                    <h3 class="text-lg text-center">5 Questions sur le thème: <br><span id="theme">Géographie</span></h3>
+
+                    <button class="rounded-2xl bg-blue-500 px-2 py-1 shadow-xl hover:bg-blue-600 w-1/4" id="start-button">Commencer</button>
+                </div>
+                <!--Play menu-->
+                <div class="hidden" id="play-menu">
+                    <h3 class="text-lg text-center my-3">Question <span id="number-question">1</span>/5</h3>
+
+                    <p class="font-bold text-center mt-4" id="question">Question</p>
+
+                    <hr class="border-t">
+
+                    <div class="w-full mt-10 h-40">
+                        <ul class="flex flex-col justify-around w-full h-full pl-10">
+                            <li><button class="rounded-2xl bg-slate-50 px-2 py-1 shadow-xl hover:bg-slate-300 border border-blue-500 reponse" id="reponse1"></button></li>
+                            <li><button class="rounded-2xl bg-slate-50 px-2 py-1 shadow-xl hover:bg-slate-300 border border-blue-500 reponse" id="reponse2"></button></li>
+                            <li><button class="rounded-2xl bg-slate-50 px-2 py-1 shadow-xl hover:bg-slate-300 border border-blue-500 reponse" id="reponse3"></button></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--End menu-->
+                <div class="hidden"  id="end-menu">
+                    <div class="flex flex-col justify-evenly h-full visible items-center">
+                        <h3 class="text-lg text-center my-3">Résultats</h3>
+    
+                        <p class="font-bold text-center mt-4 mb-16" id="resultats"></p>
+    
+                        <button class="rounded-2xl bg-blue-500 px-2 py-1 shadow-xl hover:bg-blue-600 w-1/4 mx-auto" id="restart-button">Recommencer</button>
+                    </div>
+                </div>
+                
+                
+
+
+            </div>
+            
+        </main>
+        
+        
     </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script src="src/script.js"></script>
 </html>
+    
