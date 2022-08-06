@@ -1,5 +1,5 @@
 let score = 0;
-let index = 1;
+let index = 0;
 
 $(document).ready(function() {
 
@@ -7,6 +7,10 @@ $(document).ready(function() {
         ChangeTheme(this);
         $('h2').text(this.value);
         $('#theme').text(this.value);
+        $('h2').fadeIn(300);
+        $('#theme').fadeIn(300);
+        
+
     });
 
     $("#start-button").click(function() {
@@ -26,27 +30,70 @@ $(document).ready(function() {
 
     $("button").filter('.reponse').click(function() {
         if (this.value == 1) {
-            $(this).animate({backgroundColor: "#2FF417"}, 'slow');
-            score++;
-        }else{
-            $(this).animate({backgroundColor: "#F51818"}, 'slow');
-        }
-        $("#number-question").text(index + 1);
-        index++;
-        if(indexMax()){
-            cacherJeu();
-            afficherFin();
-            $("#resultats").text("Vous avez fait " + score +"/" + questionsGeo.length + " bonnes réponses");
-        }
-        verifiTheme();
-    
-    });
 
+            $(this).css("background-color", "#5AE943", 'fast');
+
+            //Ajoute la classe animate-correct au bouton cliqué
+            $(this).addClass("animate-correct");
+            //Supprime la classe animate-correct au bouton cliqué avec 0.5s de délai
+            setTimeout(function() {
+                $(this).removeClass("animate-correct");
+            }.bind(this), 500);
+
+            score++;
+            
+        }else{
+            $(this).css("background-color", "#F51818", 'fast');
+
+            $(this).addClass("animate-incorrect");
+
+            setTimeout(function() {
+                $(this).removeClass("animate-incorrect");
+            }.bind(this), 500);
+
+            
+        }
+        
+        $("button").filter('.reponse').css("pointer-events", "none");
+         
+        // Attendre 5 secondes avant de changer de question
+        setTimeout(function() {
+            if(index!=5){
+                $("#number-question").text(index + 1);
+            }
+            index++;
+            //remettre la couleur du bouton par defaut
+            $("button").filter('.reponse').css("background-color", "#FFFFFF");
+            $("button").filter('.reponse').css("pointer-events", "auto");
+            if(indexMax()){
+                cacherJeu();
+                afficherFin();
+                $("#resultats").text("Vous avez fait " + score +"/" + questionsGeo.length + " bonnes réponses");
+            }else{
+                
+                
+                verifiTheme();
+            } 
+        }
+        , 1000);
+
+        setTimeout(function() {
+            $("button").filter('.reponse').fadeOut("fast");
+            $("#question").fadeOut("fast");
+        },800);
+        
+        
+        
+       
+        
+    });
 });
 
 
 function affichageQuestion(questionMatiere) {
     quest = questionMatiere[index - 1];
+    //Cacher avec un fadeou toute les réponses
+    
     $("#question").text(quest.question);
     $("#reponse1").text(quest.reponse.ville);
     $("#reponse1").val(quest.reponse.value);
@@ -54,36 +101,47 @@ function affichageQuestion(questionMatiere) {
     $("#reponse2").val(quest.reponse2.value);
     $("#reponse3").text(quest.reponse3.ville);
     $("#reponse3").val(quest.reponse3.value);
+    //Afficher avec un fadein toute les réponses
+    
+    $("button").filter('.reponse').fadeIn("slow");
+    $("#question").fadeIn("slow");
     
 };
 
 
 // Changer le display du menu
 function cacherMenu(){
-    $("#start-menu").hide();
+    $("#start-menu").fadeOut("slow");
 }
 
 function afficherMenu(){
-    $("#start-menu").show();
+    setTimeout(function() {
+        $("#start-menu").fadeIn("fast");
+    },100);
 }
 
 
 // Changer le display du Jeu
 function afficherJeu(){
-    $("#play-menu").show();
+    //attendre 1 seconde avant
+    setTimeout(function() {
+
+        $("#play-menu").fadeIn("slow");
+    },600);
+
 }
 
 function cacherJeu(){
-    $("#play-menu").hide();
+    $("#play-menu").fadeOut(80);
 }
 
 // Changer le display de fin
 function afficherFin(){
-    $("#end-menu").show(); 
+    $("#end-menu").fadeIn(500); 
 }
 
 function cacherFin(){
-    $("#end-menu").hide();
+    $("#end-menu").fadeOut(100);
     index = 1;
     score = 0;
     $("#number-question").text(index);
@@ -93,11 +151,12 @@ function cacherFin(){
 function ChangeTheme(button){
     if($("#start-menu").display == null && $("h2").text() != button.value){
         cacherJeu();
-        afficherMenu();
         cacherFin();
+        afficherMenu();
         score = 0;
         index = 1;
         $("#number-question").text(index);
+        
     }
 }
 
@@ -372,3 +431,5 @@ qM5 = {
 }
 
 let questionsMath = [qM1, qM2, qM3, qM4, qM5];
+
+;
